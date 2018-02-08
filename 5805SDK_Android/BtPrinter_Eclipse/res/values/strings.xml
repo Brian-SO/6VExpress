@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="app_name">Bluetooth printer</string>
+
+<string name="str_succonnect">connection is successful</string>
+<string name="str_connecting">connecting</string>
+<string name="str_unconnected">not connected</string>
+    <string name="button_disconect">Disconnect</string>
+    <string name="button_connect">Connect</string>
+    <string name="button_check">Status</string>
+    <string name="button_relink">Recon</string>
+    
+    <string name="tip_cmdfile">Please put the instruction file cmd.text in the SD card</string>
+    <string name="tip_print_normal">Printer paper is normal</string>
+    <string name="tip_print_nopaper">Printer out of paper</string>
+
+<!-- DeviceListActivity -->
+<string name="scanning">scanning device ...</string>
+<string name="select_device">select a device connection</string>
+<string name="none_paired">no paired device</string>
+<string name="none_found">device not found</string>
+<string name="title_paired_devices">paired device</string>
+<string name="title_other_devices">other available devices</string>
+<string name="button_scan">Scan</string>
+
+
+<string name="str_printword">Text</string>
+	<string name="str_printunicode">Unicode</string>
+<string name="str_printimg">Picture</string>
+<string name="str_printbarcode">Barcode</string>
+<string name="str_printqrcode">2D code</string>
+<string name="str_printticket">Ticket</string>
+<string name="str_printlabel">Tag/Mark</string>
+</resources>
