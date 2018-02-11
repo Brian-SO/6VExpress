@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
+import android.text.format.DateFormat;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -15,11 +14,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.brian.express6v.entity.PrintBean;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Date;
 
 /**
  * Created by suboan on 2018/2/7.
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         webview = (WebView) findViewById(R.id.webview);
 
         webview.loadUrl("http://wl.huazhon.cn/CustomerManage/OrderEntry/login");//调用在线网页
@@ -75,13 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        /*if (webview.canGoBack()){//判断网页是否为最后一页
-            webview.goBack();//返回上一页
-        }else {
-            this.finish();
-            System.exit(0);//退出程序
-        }*/
-
         /*long mNowTime = System.currentTimeMillis();//获取第一次按键时间
         if((mNowTime - mPressedTime) > 2000){//比较两次按键时间差
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -90,10 +81,51 @@ public class MainActivity extends AppCompatActivity {
             this.finish();
             System.exit(0);
         }*/
-        Intent intent = new Intent();
-        intent.setClass(this,PrinterActivity.class);
-        // 转向登陆后的页面
-        startActivity(intent);
+        String jsonStr = "{\"fhr\": \"发货人\""+
+                ", \"fhrdh\": \"发货人电话\""+
+                ", \"shr\": \"收货人\""+
+                ", \"shrdh\": \"收货人电话\""+
+                ", \"shrdz\": \"收货人地址\""+
+                ", \"tydh\": \"托运单号\""+
+                ", \"shwd\": \"收货网点\""+
+                ", \"mdwd\": \"目的网点\""+
+                ", \"hwmc\": \"货物名称\""+
+                ", \"jshj\": \"10.52\""+
+                ", \"hj\": \"运费合计\""+
+                ", \"fkfs\": \"付款方式\""+
+                ", \"tyfs\": \"托运方式\""+
+                ", \"company\": \"公司\""+
+                ", \"remark\": \"备注\"}";
+        try {
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            // 使用Parcelable传递对象
+            PrintBean printBean = new PrintBean();
+            printBean.setFhr(jsonObject.getString("fhr"));
+            printBean.setFhrdh(jsonObject.getString("fhrdh"));
+            printBean.setShr(jsonObject.getString("shr"));
+            printBean.setShrdh(jsonObject.getString("shrdh"));
+            printBean.setShrdz(jsonObject.getString("shrdz"));
+            printBean.setTydh(jsonObject.getString("tydh"));
+            printBean.setShwd(jsonObject.getString("shwd"));
+            printBean.setMdwd(jsonObject.getString("mdwd"));
+            printBean.setHwmc(jsonObject.getString("hwmc"));
+            printBean.setJshj(jsonObject.getString("jshj"));
+            printBean.setHj(jsonObject.getString("hj"));
+            printBean.setFkfs(jsonObject.getString("fkfs"));
+            printBean.setTyfs(jsonObject.getString("tyfs"));
+            printBean.setCompany(jsonObject.getString("company"));
+            printBean.setRemark(jsonObject.getString("remark"));
+            printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
+            Bundle bundle = new Bundle();
+            // Bundle有putParcelableArray和putParcelableArrayList方法，也就可以传递数组和列表
+            bundle.putParcelable("printBean", printBean);
+            Intent intent = new Intent(this,PrinterActivity.class);
+            intent.putExtras(bundle);
+            // 转向登陆后的页面
+            startActivity(intent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -109,19 +141,31 @@ public class MainActivity extends AppCompatActivity {
         public void getDataFromJs(String result){
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                /*final String name=jsonObject.getString("name");
-                final int age=jsonObject.getInt("age");
-                final String company=jsonObject.getString("company");
-
-                //这是一条线程加上这个，才能更新ui
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textview.setText("名字："+name+"\n" +"年龄："+ age +"\n" +"公司："+ company);
-                    }
-                });*/
-                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-
+                // 使用Parcelable传递对象
+                PrintBean printBean = new PrintBean();
+                printBean.setFhr(jsonObject.getString("fhr"));
+                printBean.setFhrdh(jsonObject.getString("fhrdh"));
+                printBean.setShr(jsonObject.getString("shr"));
+                printBean.setShrdh(jsonObject.getString("shrdh"));
+                printBean.setShrdz(jsonObject.getString("shrdz"));
+                printBean.setTydh(jsonObject.getString("tydh"));
+                printBean.setShwd(jsonObject.getString("shwd"));
+                printBean.setMdwd(jsonObject.getString("mdwd"));
+                printBean.setHwmc(jsonObject.getString("hwmc"));
+                printBean.setJshj(jsonObject.getString("jshj"));
+                printBean.setHj(jsonObject.getString("hj"));
+                printBean.setFkfs(jsonObject.getString("fkfs"));
+                printBean.setTyfs(jsonObject.getString("tyfs"));
+                printBean.setCompany(jsonObject.getString("company"));
+                printBean.setRemark(jsonObject.getString("remark"));
+                printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
+                Bundle bundle = new Bundle();
+                // Bundle有putParcelableArray和putParcelableArrayList方法，也就可以传递数组和列表
+                bundle.putParcelable("printBean", printBean);
+                Intent intent = new Intent(context,PrinterActivity.class);
+                intent.putExtras(bundle);
+                // 转向登陆后的页面
+                startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();
                 Toast.makeText(context, "解析数据出错", Toast.LENGTH_SHORT).show();
