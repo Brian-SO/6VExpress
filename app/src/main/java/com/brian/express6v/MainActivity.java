@@ -25,7 +25,7 @@ import java.util.Date;
  *
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private long mPressedTime = 0;
     private WebView webview;
@@ -85,21 +85,20 @@ public class MainActivity extends AppCompatActivity {
                 ", \"fhrdh\": \"发货人电话\""+
                 ", \"shr\": \"收货人\""+
                 ", \"shrdh\": \"收货人电话\""+
-                ", \"shrdz\": \"收货人地址\""+
-                ", \"tydh\": \"托运单号\""+
+                ", \"shrdz\": \"广东省广州市天河区吉山幼儿园\""+
+                ", \"tydh\": \"02018020800001\""+
                 ", \"shwd\": \"收货网点\""+
                 ", \"mdwd\": \"目的网点\""+
                 ", \"hwmc\": \"货物名称\""+
-                ", \"jshj\": \"10.52\""+
-                ", \"hj\": \"运费合计\""+
-                ", \"fkfs\": \"付款方式\""+
-                ", \"tyfs\": \"托运方式\""+
-                ", \"company\": \"公司\""+
-                ", \"remark\": \"备注\"}";
+                ", \"jshj\": \"1\""+
+                ", \"hj\": \"30.24\""+
+                ", \"fkfs\": \"现付\""+
+                ", \"tyfs\": \"自提\""+
+                ", \"company\": \"金达公司\""+
+                ", \"remark\": \"查询物流跟踪请上：www.6vwl.com\"}";
         try {
             JSONObject jsonObject = new JSONObject(jsonStr);
-            // 使用Parcelable传递对象
-            PrintBean printBean = new PrintBean();
+            printBean = new PrintBean();
             printBean.setFhr(jsonObject.getString("fhr"));
             printBean.setFhrdh(jsonObject.getString("fhrdh"));
             printBean.setShr(jsonObject.getString("shr"));
@@ -116,13 +115,7 @@ public class MainActivity extends AppCompatActivity {
             printBean.setCompany(jsonObject.getString("company"));
             printBean.setRemark(jsonObject.getString("remark"));
             printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
-            Bundle bundle = new Bundle();
-            // Bundle有putParcelableArray和putParcelableArrayList方法，也就可以传递数组和列表
-            bundle.putParcelable("printBean", printBean);
-            Intent intent = new Intent(this,PrinterActivity.class);
-            intent.putExtras(bundle);
-            // 转向登陆后的页面
-            startActivity(intent);
+            connBluetoothDevice();
         } catch (JSONException e) {
             e.printStackTrace();
         }
