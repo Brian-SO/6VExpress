@@ -3,9 +3,9 @@ package com.brian.express6v;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -24,7 +24,6 @@ import java.util.Date;
  * Created by suboan on 2018/2/7.
  *
  */
-
 public class MainActivity extends BaseActivity {
 
     private long mPressedTime = 0;
@@ -73,15 +72,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        /*long mNowTime = System.currentTimeMillis();//获取第一次按键时间
+        long mNowTime = System.currentTimeMillis();//获取第一次按键时间
         if((mNowTime - mPressedTime) > 2000){//比较两次按键时间差
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             mPressedTime = mNowTime;
         } else{//退出程序
             this.finish();
             System.exit(0);
-        }*/
-        String jsonStr = "{\"fhr\": \"发货人\""+
+        }
+        /*String jsonStr = "{\"fhr\": \"发货人\""+
                 ", \"fhrdh\": \"发货人电话\""+
                 ", \"shr\": \"收货人\""+
                 ", \"shrdh\": \"收货人电话\""+
@@ -94,7 +93,7 @@ public class MainActivity extends BaseActivity {
                 ", \"hj\": \"30.24\""+
                 ", \"fkfs\": \"现付\""+
                 ", \"tyfs\": \"自提\""+
-                ", \"company\": \"金达公司\""+
+                ", \"company\": \"金达物流\""+
                 ", \"remark\": \"查询物流跟踪请上：www.6vwl.com\"}";
         try {
             JSONObject jsonObject = new JSONObject(jsonStr);
@@ -116,9 +115,11 @@ public class MainActivity extends BaseActivity {
             printBean.setRemark(jsonObject.getString("remark"));
             printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
             connBluetoothDevice();
+//            Toast.makeText(MainActivity.this,printBean.toString(), Toast.LENGTH_LONG).show();
+//            Log.e("daf",printBean.toString());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -127,15 +128,14 @@ public class MainActivity extends BaseActivity {
     private class JsInterface {
         private Context context;
         public JsInterface(Context context) {
-            this.context=context;
+            this.context = context;
         }
 
         @JavascriptInterface   //sdk17版本以上加上注解,不然接收不了js的返回值
         public void getDataFromJs(String result){
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                // 使用Parcelable传递对象
-                PrintBean printBean = new PrintBean();
+                printBean = new PrintBean();
                 printBean.setFhr(jsonObject.getString("fhr"));
                 printBean.setFhrdh(jsonObject.getString("fhrdh"));
                 printBean.setShr(jsonObject.getString("shr"));
@@ -152,13 +152,17 @@ public class MainActivity extends BaseActivity {
                 printBean.setCompany(jsonObject.getString("company"));
                 printBean.setRemark(jsonObject.getString("remark"));
                 printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
+                connBluetoothDevice();
+//                Toast.makeText(context,printBean.toString(), Toast.LENGTH_LONG).show();
+//                Log.e("daf",printBean.toString());
+                /*
+                //跳转页面方法，使用Parcelable传递对象
                 Bundle bundle = new Bundle();
                 // Bundle有putParcelableArray和putParcelableArrayList方法，也就可以传递数组和列表
                 bundle.putParcelable("printBean", printBean);
                 Intent intent = new Intent(context,PrinterActivity.class);
                 intent.putExtras(bundle);
-                // 转向登陆后的页面
-                startActivity(intent);
+                startActivity(intent);*/
             } catch (JSONException e) {
                 e.printStackTrace();
                 Toast.makeText(context, "解析数据出错", Toast.LENGTH_SHORT).show();

@@ -211,4 +211,24 @@ public class PrintBean implements Parcelable {
         parcel.writeString(remark);
         parcel.writeString(tyrq);
     }
+
+    @Override
+    public String toString() {
+        return "fhr='" + fhr + '\'' + "\n" +
+                "fhrdh='" + fhrdh + '\'' + "\n" +
+                "shr='" + shr + '\'' + "\n" +
+                "shrdh='" + shrdh + '\'' + "\n" +
+                "shrdz='" + shrdz + '\'' + "\n" +
+                "tydh='" + tydh + '\'' + "\n" +
+                "shwd='" + shwd + '\'' + "\n" +
+                "mdwd='" + mdwd + '\'' + "\n" +
+                "hwmc='" + hwmc + '\'' + "\n" +
+                "jshj='" + jshj + '\'' + "\n" +
+                "hj='" + hj + '\'' + "\n" +
+                "fkfs='" + fkfs + '\'' + "\n" +
+                "tyfs='" + tyfs + '\'' + "\n" +
+                "company='" + company + '\'' + "\n" +
+                "remark='" + remark + '\'' + "\n" +
+                "tyrq='" + tyrq + '\'';
+    }
 }
