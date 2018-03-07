@@ -17,13 +17,17 @@ public class PrintBean implements Parcelable {
     private String tydh;//托运单号
     private String shwd;//收货网点
     private String mdwd;//目的网点
+    private String ddwd;//到达网点
     private String hwmc;//货物名称
     private String jshj;//件数合计
     private String hj;//运费合计
     private String fkfs;//付款方式
     private String tyfs;//托运方式
+    private String sfbj;//是否保价
+    private String bjje;//保价金额
     private String company;//公司
     private String remark;//备注
+    private String tyxz;//托运须知
     private String tyrq;//托运日期
 
     public String getFhr() {
@@ -90,6 +94,14 @@ public class PrintBean implements Parcelable {
         this.mdwd = mdwd;
     }
 
+    public String getDdwd() {
+        return ddwd;
+    }
+
+    public void setDdwd(String ddwd) {
+        this.ddwd = ddwd;
+    }
+
     public String getHwmc() {
         return hwmc;
     }
@@ -130,6 +142,22 @@ public class PrintBean implements Parcelable {
         this.tyfs = tyfs;
     }
 
+    public String getSfbj() {
+        return sfbj;
+    }
+
+    public void setSfbj(String sfbj) {
+        this.sfbj = sfbj;
+    }
+
+    public String getBjje() {
+        return bjje;
+    }
+
+    public void setBjje(String bjje) {
+        this.bjje = bjje;
+    }
+
     public String getCompany() {
         return company;
     }
@@ -144,6 +172,14 @@ public class PrintBean implements Parcelable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getTyxz() {
+        return tyxz;
+    }
+
+    public void setTyxz(String tyxz) {
+        this.tyxz = tyxz;
     }
 
     public String getTyrq() {
@@ -168,13 +204,17 @@ public class PrintBean implements Parcelable {
             printBean.tydh = source.readString();
             printBean.shwd = source.readString();
             printBean.mdwd = source.readString();
+            printBean.ddwd = source.readString();
             printBean.hwmc = source.readString();
             printBean.jshj = source.readString();
             printBean.hj = source.readString();
             printBean.fkfs = source.readString();
             printBean.tyfs = source.readString();
+            printBean.sfbj = source.readString();
+            printBean.bjje = source.readString();
             printBean.company = source.readString();
             printBean.remark = source.readString();
+            printBean.tyxz = source.readString();
             printBean.tyrq = source.readString();
             return printBean;
         }
@@ -202,13 +242,17 @@ public class PrintBean implements Parcelable {
         parcel.writeString(tydh);
         parcel.writeString(shwd);
         parcel.writeString(mdwd);
+        parcel.writeString(ddwd);
         parcel.writeString(hwmc);
         parcel.writeString(jshj);
         parcel.writeString(hj);
         parcel.writeString(fkfs);
         parcel.writeString(tyfs);
+        parcel.writeString(sfbj);
+        parcel.writeString(bjje);
         parcel.writeString(company);
         parcel.writeString(remark);
+        parcel.writeString(tyxz);
         parcel.writeString(tyrq);
     }
 
@@ -222,13 +266,17 @@ public class PrintBean implements Parcelable {
                 "tydh='" + tydh + '\'' + "\n" +
                 "shwd='" + shwd + '\'' + "\n" +
                 "mdwd='" + mdwd + '\'' + "\n" +
+                "ddwd='" + ddwd + '\'' + "\n" +
                 "hwmc='" + hwmc + '\'' + "\n" +
                 "jshj='" + jshj + '\'' + "\n" +
                 "hj='" + hj + '\'' + "\n" +
                 "fkfs='" + fkfs + '\'' + "\n" +
                 "tyfs='" + tyfs + '\'' + "\n" +
+                "sfbj='" + sfbj + '\'' + "\n" +
+                "bjje='" + bjje + '\'' + "\n" +
                 "company='" + company + '\'' + "\n" +
                 "remark='" + remark + '\'' + "\n" +
+                "tyxz='" + tyxz + '\'' + "\n" +
                 "tyrq='" + tyrq + '\'';
     }
 }

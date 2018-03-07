@@ -80,46 +80,6 @@ public class MainActivity extends BaseActivity {
             this.finish();
             System.exit(0);
         }
-        /*String jsonStr = "{\"fhr\": \"发货人\""+
-                ", \"fhrdh\": \"发货人电话\""+
-                ", \"shr\": \"收货人\""+
-                ", \"shrdh\": \"收货人电话\""+
-                ", \"shrdz\": \"广东省广州市天河区吉山幼儿园\""+
-                ", \"tydh\": \"02018020800001\""+
-                ", \"shwd\": \"收货网点\""+
-                ", \"mdwd\": \"目的网点\""+
-                ", \"hwmc\": \"货物名称\""+
-                ", \"jshj\": \"1\""+
-                ", \"hj\": \"30.24\""+
-                ", \"fkfs\": \"现付\""+
-                ", \"tyfs\": \"自提\""+
-                ", \"company\": \"金达物流\""+
-                ", \"remark\": \"查询物流跟踪请上：www.6vwl.com\"}";
-        try {
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            printBean = new PrintBean();
-            printBean.setFhr(jsonObject.getString("fhr"));
-            printBean.setFhrdh(jsonObject.getString("fhrdh"));
-            printBean.setShr(jsonObject.getString("shr"));
-            printBean.setShrdh(jsonObject.getString("shrdh"));
-            printBean.setShrdz(jsonObject.getString("shrdz"));
-            printBean.setTydh(jsonObject.getString("tydh"));
-            printBean.setShwd(jsonObject.getString("shwd"));
-            printBean.setMdwd(jsonObject.getString("mdwd"));
-            printBean.setHwmc(jsonObject.getString("hwmc"));
-            printBean.setJshj(jsonObject.getString("jshj"));
-            printBean.setHj(jsonObject.getString("hj"));
-            printBean.setFkfs(jsonObject.getString("fkfs"));
-            printBean.setTyfs(jsonObject.getString("tyfs"));
-            printBean.setCompany(jsonObject.getString("company"));
-            printBean.setRemark(jsonObject.getString("remark"));
-            printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
-            connBluetoothDevice();
-//            Toast.makeText(MainActivity.this,printBean.toString(), Toast.LENGTH_LONG).show();
-//            Log.e("daf",printBean.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
     }
 
     /**
@@ -144,13 +104,17 @@ public class MainActivity extends BaseActivity {
                 printBean.setTydh(jsonObject.getString("tydh"));
                 printBean.setShwd(jsonObject.getString("shwd"));
                 printBean.setMdwd(jsonObject.getString("mdwd"));
+                printBean.setDdwd(jsonObject.getString("ddwd"));
                 printBean.setHwmc(jsonObject.getString("hwmc"));
                 printBean.setJshj(jsonObject.getString("jshj"));
                 printBean.setHj(jsonObject.getString("hj"));
                 printBean.setFkfs(jsonObject.getString("fkfs"));
                 printBean.setTyfs(jsonObject.getString("tyfs"));
+                printBean.setSfbj(jsonObject.getString("sfbj").equals("1") ? "是" : "否");
+                printBean.setBjje(jsonObject.getString("bjje"));
                 printBean.setCompany(jsonObject.getString("company"));
                 printBean.setRemark(jsonObject.getString("remark"));
+                printBean.setTyxz(jsonObject.getString("tyxz"));
                 printBean.setTyrq(DateFormat.format("yyyy年MM月dd日", new Date()).toString());
                 connBluetoothDevice();
 //                Toast.makeText(context,printBean.toString(), Toast.LENGTH_LONG).show();

@@ -135,6 +135,8 @@ public class BaseActivity extends AppCompatActivity {
         WPXMain.printCommand(GeneralAttributes.INSTRUCTIONS_ESC_ALIGN_LEFT);
         iBluetoothPrint.printText(printBean.getTyrq());
         iBluetoothPrint.printText("NO.".concat(printBean.getTydh()));
+        iBluetoothPrint.printText("卸货站点:".concat(printBean.getMdwd()));
+        iBluetoothPrint.printText("到达站点:".concat(printBean.getDdwd()));
         iBluetoothPrint.printText("收货人:".concat(printBean.getShr()));
         iBluetoothPrint.printText("电话:".concat(printBean.getShrdh()));
         iBluetoothPrint.printText("地址:".concat(printBean.getShrdz()));
@@ -143,12 +145,15 @@ public class BaseActivity extends AppCompatActivity {
         iBluetoothPrint.printText("货物名称:".concat(printBean.getHwmc()));
 //        iBluetoothPrint.printText("件数:".concat(String.valueOf(count).concat("-".concat(String.valueOf(i+1)))));
         iBluetoothPrint.printText("件数:".concat(printBean.getJshj()));
+        iBluetoothPrint.printText("运费合计:".concat(printBean.getHj()));
+        iBluetoothPrint.printText("是否保价:".concat(printBean.getSfbj()));
+        iBluetoothPrint.printText("保价金额:".concat(printBean.getBjje()));
         iBluetoothPrint.printText("付款方式:".concat(printBean.getFkfs().concat("  交接方式:".concat(printBean.getTyfs()))));
         if (isPrintImage) {
             iBluetoothPrint.printText(printBean.getRemark());
             iBluetoothPrint.printText("或扫描二维码查询");
             iBluetoothPrint.printImage(getApplicationContext().getResources(), R.drawable.wechat);
-            iBluetoothPrint.printText("注：如有货物损坏丢失，保价货物按照相关规定赔偿，未保价货物按运费的3倍赔偿");
+            iBluetoothPrint.printText(printBean.getTyxz());
             //走纸
             WPXMain.printCommand(new byte[]{GeneralAttributes.CR});//换行
             WPXMain.printCommand(new byte[]{GeneralAttributes.CR});//换行
